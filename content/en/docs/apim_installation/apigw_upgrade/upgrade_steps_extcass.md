@@ -1,9 +1,9 @@
 {
 "title": "Upgrade from API Gateway 7.5.x or 7.6.x",
-"linkTitle": "Upgrade from API Gateway 7.5.x or 7.6.x",
-"weight": 20,
-"date": "2019-10-07",
-"description": "Upgrade from API Gateway 7.5.1 or later to API Gateway 7.7."
+  "linkTitle": "Upgrade from API Gateway 7.5.x or 7.6.x",
+  "weight": 20,
+  "date": "2019-10-07",
+  "description": "Upgrade from API Gateway 7.5.1 or later to API Gateway 7.7."
 }
 In API Gateway 7.5.1 and later versions, the Apache Cassandra database is fully separated from the API Gateway. This means that the data contained in Apache Cassandra does not need to be exported and imported along with the other configuration data when upgrading.
 
@@ -22,7 +22,7 @@ In an upgrade from API Gateway 7.5.1 and later versions:
 
 ## Overview of upgrade steps
 
-{{< alert title="Note" color="primary" >}}Read through this documentation in its entirety before beginning the upgrade process to anticipate each of the steps involved.{{< /alert >}}  
+{{< alert title="Note" color="primary" >}}Read through this documentation in its entirety before beginning the upgrade process to anticipate each of the steps involved.{{< /alert >}}
 
 An upgrade generally involves performing the following steps:
 
@@ -149,12 +149,13 @@ Perform the checks on your old API Gateway 7.5.1 installation, as detailed in [C
 ### Step 1 - Install API Gateway 7.7
 
 1. Select the **Custom** option in the installer as follows:
-    * Admin Node Manager - Select this component.
-    * API Gateway Server - Select this component.
-    * Policy Studio – Select this only if you want to run Policy Studio on the local machine.
-    * API Manager – Select this only if you are upgrading API Manager.
-    * QuickStart tutorial - Do not select this component. The QuickStart tutorial creates and starts processes in the new installation. `sysupgrade` requires that no processes are running in the new installation.
-    * Cassandra - Do not select this component. The external Cassandra configuration is retained when upgrading from 7.5.x or 7.6.x.
+
+   * Admin Node Manager - Select this component.
+   * API Gateway Server - Select this component.
+   * Policy Studio – Select this only if you want to run Policy Studio on the local machine.
+   * API Manager – Select this only if you are upgrading API Manager.
+   * QuickStart tutorial - Do not select this component. The QuickStart tutorial creates and starts processes in the new installation. `sysupgrade` requires that no processes are running in the new installation.
+   * Cassandra - Do not select this component. The external Cassandra configuration is retained when upgrading from 7.5.x or 7.6.x.
 2. When prompted for an installation directory, enter a new directory (for example, `/opt/Axway-7.7`). A warning message displays if you try to install 7.7 in the same directory as the old installation.
 3. When prompted to set an administrator user name and password, enter the same Admin Node Manager credentials that you use for the old API Gateway installation.
 
@@ -194,6 +195,10 @@ This upgrades the external OAuth and KPS databases (if necessary), creates a new
 When all steps have completed successfully, the new API Gateway version 7.7 processes should be running.
 
 ### Step 5 - Run `update-apimanager`
+
+{{< alert title="Only applicable for 7.7.0 up to the July Service Pack" color="info" >}}The requirement of running update-apimanager has been removed from the September 20 Service Pack onward.\
+Updating API Manager is now carried out as part of config upgrade and is available through applying a Service Pack to an existing installation, or by running other upgrade options, such as projupgrade or upgrading config in Policy Studio.\
+Existing projects can be upgraded in place and deployed to a running gateway.{{< /alert >}}
 
 Run the `update-apimanager` script if any of the following products are installed:
 
@@ -262,12 +267,13 @@ Perform the checks on your old API Gateway 7.5.1 installation, as detailed in [C
 Install API Gateway 7.7 on each node in the multi-node topology where your old API Gateway domain is running.
 
 1. Select the **Custom** option in the installer as follows:
-    * Admin Node Manager – Select this on NodeA, NodeB and NodeC for the sample topology.
-    * API Gateway Server – Select this on NodeA, NodeB and NodeC for the sample topology. If you are installing on a node that does not run any API Gateways (running an Admin Node Manager only), do not select this.
-    * Policy Studio – Select this on the nodes on which you will run Policy Studio.
-    * API Manager – Select this on NodeC for the sample topology. Select it on other nodes if required.
-    * QuickStart tutorial - Do not select this component. The QuickStart tutorial creates and starts processes in the new installation. `sysupgrade` requires that no processes are running in the new installation.
-    * Cassandra - Do not select this component. The external Cassandra configuration is retained when upgrading from 7.5.x or 7.6.x.
+
+   * Admin Node Manager – Select this on NodeA, NodeB and NodeC for the sample topology.
+   * API Gateway Server – Select this on NodeA, NodeB and NodeC for the sample topology. If you are installing on a node that does not run any API Gateways (running an Admin Node Manager only), do not select this.
+   * Policy Studio – Select this on the nodes on which you will run Policy Studio.
+   * API Manager – Select this on NodeC for the sample topology. Select it on other nodes if required.
+   * QuickStart tutorial - Do not select this component. The QuickStart tutorial creates and starts processes in the new installation. `sysupgrade` requires that no processes are running in the new installation.
+   * Cassandra - Do not select this component. The external Cassandra configuration is retained when upgrading from 7.5.x or 7.6.x.
 2. When prompted for an installation directory, enter a new directory (for example, `/opt/Axway-7.7`). A warning message displays if you try to install 7.7 in the same directory as the old installation.
 3. When prompted to set an administrator user name and password, enter the same Admin Node Manager credentials that you use for the old API Gateway installation.
 
@@ -359,8 +365,9 @@ If you upgraded from API Gateway 7.5.1 or later to version 7.7 all Cassandra hos
 Each API Gateway group has a configuration that is typically deployed as a `.fed` file. When you upgrade from an earlier version of API Gateway, configuration for all API Gateway groups is automatically upgraded during `sysupgrade`. However, you might have configuration files that were originally created in Policy Studio in a development environment that also need to be upgraded. You can upgrade the configuration in your development environment in one of the following ways:
 
 * In Policy Studio:
-    * Choose the **From an API Gateway instance** option to create a new project from the configuration in an already upgraded API Gateway.
-    * Choose the **From existing configuration** option to create a new project from an old configuration. The configuration is upgraded to version 7.7 automatically.
+
+  * Choose the **From an API Gateway instance** option to create a new project from the configuration in an already upgraded API Gateway.
+  * Choose the **From existing configuration** option to create a new project from an old configuration. The configuration is upgraded to version 7.7 automatically.
 * If you upgraded from version 7.5.1 or later and you have several projects to upgrade (these projects might be independent of one another, or could include shared projects and their dependencies), you can use the `projupgrade` tool. This tool upgrades several projects at once. For more information, see [Upgrade an API Gateway project](/docs/apigtw_devops/deploy_package_tools/#upgrade-an-api-gateway-project).
 
 ### Upgrade services
@@ -372,9 +379,11 @@ Complete the following steps after running `sysupgrade apply`:
 1. Switch user to `root` to enable you to modify files in `/etc/init.d`. Typically, Axway services file names start with `vshell-`.
 2. Edit the Node Manager script and update the `VDISTDIR` variable to point to the `apigateway` folder in the new installation.
    For example, on a machine called XUbuntu02, edit the file `/etc/init.d/vshell-Node-Manager-on-XUbuntu02`.
+
    * Update the `VDISTDIR` variable (for example, change `VDISTDIR="/opt/Axway-7.2.2/apigateway` to `VDISTDIR="/opt/Axway-7.7/apigateway`).
 3. Edit each of the relevant API Gateway scripts, and update the `VDISTDIR` and the `VINSTDIR` variables to point to the `apigateway` folder in the new installation.
    For example, on a machine called XUbuntu02 with one API Gateway called `Gateway1` that is a member of a group called `Default Group`, edit the file `/etc/init.d/vshell-Default-Group-Gateway1`.
+
    * Update the `VDISTDIR` variable (for example, change `VDISTDIR="/opt/Axway-7.2.2/apigateway` to `VDISTDIR="/opt/Axway-7.7/apigateway`).
    * Update the `VINSTDIR` variable (for example, change `VINSTDIR="/opt/Axway-7.2.2/apigateway/groups/group-2/instance-1` to `VINSTDIR="/opt/Axway-7.7/apigateway/groups/group-2/instance-1`).
 4. Save the changes to the files and restart the machine. When the machine restarts the new services are started.
