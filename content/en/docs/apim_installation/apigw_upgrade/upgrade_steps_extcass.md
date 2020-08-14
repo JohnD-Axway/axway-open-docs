@@ -198,7 +198,8 @@ When all steps have completed successfully, the new API Gateway version 7.7 proc
 
 {{< alert title="Only applicable for 7.7.0 up to the July Service Pack" color="info" >}}The requirement of running update-apimanager has been removed from the September 20 Service Pack onward.\
 Updating API Manager is now carried out as part of config upgrade and is available through applying a Service Pack to an existing installation, or by running other upgrade options, such as projupgrade or upgrading config in Policy Studio.\
-Existing projects can be upgraded in place and deployed to a running gateway.{{< /alert >}}
+Existing projects can be upgraded in place and deployed to a running gateway.\
+If deploying an earlier release, July 20 or prior, apply the following step. Otherwise skip to step 6.{{< /alert >}}
 
 Run the `update-apimanager` script if any of the following products are installed:
 
