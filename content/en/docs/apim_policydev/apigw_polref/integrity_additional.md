@@ -80,6 +80,7 @@ If you selected the asymmetric key type, configure the following fields in the *
 * **Algorithm**: Select the algorithm used to sign the JWT. The available algorithms are listed in the following table.
 
 | Algorithm | description                                    |
+|-----------|------------------------------------------------|
 | ES256     | ECDSA using P-256 and SHA-256                  |
 | ES384     | ECDSA using P-384 and SHA-384                  |
 | ES512     | ECDSA using P-521 and SHA-512                  |
