@@ -23,9 +23,9 @@ The signed content is outputted in JWS Compact Serialization format, which is pr
 ```
 {“iss“:“joe“,
 
-„exp“:1300819380,
+"exp“:1300819380,
 
-„http://example.com/is_root“:true}
+"http://example.com/is_root“:true}
 ```
 
 When the JOSE Header, JWS Payload, and JWS Signature is combined as follows:
@@ -67,17 +67,36 @@ p0igcN_IoypGlUPQGe77Rw
 Configure the following settings on the **JWT Sign** window:
 
 * **Name**: Enter an appropriate name for the filter to display in a policy.
-
-Configure the following fields in the **Signing details** section:
-
 * **Token location**: Enter the selector expression to obtain the payload to be signed. The content can be JWT claims, encrypted token, or you can enter a different option.
+
+Configure the following fields in the **Signature Key and Algorithm** tab:
+
 * **Key type**: Select whether to sign with a private (asymmetric) key or HMAC (symmetric key).
 
 If you selected the asymmetric key type, configure the following fields in the **Asymmetric** section:
 
-* **Signing key**: Select the private key from the certificate store that is used to sign the payload.
+* **Signing key**: Select a certificate with a private key from the certificate store.  The private key is used to sign the payload. The Certificate is used to generate key related headers in the JOSE header
 * **Selector expression**: Alternatively, enter a selector expression to get the alias of the private key in the certificate store.
-* **Algorithm**: Select the algorithm used to sign.
+* **Algorithm**: Select the algorithm used to sign the JWT. The available algorithms are listed in the following table.
+
+| Algorithm | description                                    |
+| ES256     | ECDSA using P-256 and SHA-256                  |
+| ES384     | ECDSA using P-384 and SHA-384                  |
+| ES512     | ECDSA using P-521 and SHA-512                  |
+| RS256     | RSASSA-PKCS1-v1_5 using SHA-256                |
+| RS384     | RSASSA-PKCS1-v1_5 using SHA-384                |
+| RS512     | RSASSA-PKCS1-v1_5 using SHA-512                |
+| PS256     | RSASSA-PSS using SHA-256 and MGF1 with SHA-256 |
+| PS384     | RSASSA-PSS using SHA-384 and MGF1 with SHA-384 |
+| PS512     | RSASSA-PSS using SHA-512 and MGF1 with SHA-512 |
+
+The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the cert store this will be validated when the filter is saved. A selector based Alias can only be validated at runtime and an incompatible cert will cause the filter to fail.
+
+* **Use Key ID (kid)**: Selecting this checkbox will ad a 'kid' Header Parameter to the JOSE Header part of the token. The "kid** Header Parameter is a hint indicating which key was used to secure the JWS. The following options are available:
+    * **Certificate Alias**: The alias of the selected Certificate.
+    * **x5t Certificate Thumbrint**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
+    * **x5t#S256 Certificate Thumbprint**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
+    * **Custom Key ID**: a static string or selector expression can be used to set a key id that has a contextual meaning.
 
 If you selected the symmetric key type, complete the following fields in the **Symmetric** section:
 
@@ -96,7 +115,7 @@ If you selected the symmetric key type, complete the following fields in the **S
 
 * **Algorithm**: Select the algorithm used to sign.
 
-    The JWT Sign filter supports only a fixed JWT-Header, including the selected algorithm. To add more information to the header, for example, a Key-ID parameter, see [Create a signed JWT with custom fields](https://github.com/Axway-API-Management-Plus/scripting-examples/tree/master/sign-custom-jwt).
+* **Use Key ID (kid)**: Selecting this checkbox will ad a 'kid' Header Parameter to the JOSE Header part of the token. The "kid** Header Parameter is a hint indicating which shared was was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ## JWT Verify filter
 
@@ -120,8 +139,8 @@ The resulting payload output is:
 
 ```
 {“iss“:“joe“,
-„exp“:1300819380,
-„http://example.com/is_root“:true}
+"exp“:1300819380,
+"http://example.com/is_root“:true}
 ```
 
 {{< alert title="Note" color="primary" >}}The **JWT Verify** filter automatically detects whether the input JWT is signed with hash-based message authentication code (HMAC) or asymmetric key and uses the corresponding settings as appropriate. For example, you can configure verification with HMAC or certificate, depending on the type of JWT received as input.{{< /alert >}}
