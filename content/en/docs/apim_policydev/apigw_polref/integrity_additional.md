@@ -55,7 +55,8 @@ Configure the following settings on the **JWT Sign** window:
 * **Name**: Enter an appropriate name for the filter to display in a policy.
 * **Token location**: Enter the selector expression to obtain the payload to be signed. The content can be JWT claims, encrypted token, or you can enter a different option.
 
-Configure the following fields in the **Signature Key and Algorithm** tab:
+### Signature Key and Algorithm
+On the Signature Key and Algorithm tab, you can select either a symmetric or an asymmetric key to sign the JWT. Select the appropriate radio button and configure the fields in the corresponding section.
 
 * **Key type**: Select whether to sign with a private (asymmetric) key or HMAC (symmetric key).
 
@@ -108,6 +109,40 @@ If you selected the symmetric key type, complete the following fields in the **S
 
 * **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
+### Signature JOSE Header
+This tab configures which claims are present in the JWT Header. 
+The following header options can be enabled or disabled:
+* Generate 'typ' claim
+* JWK Set URL
+* Certificate specific header claims (Asymmetric key only)
+* Embed all key related claims in the 'jwk' claim (except for 'jku')
+* Generate 'x5t' thumbprint
+* Compute Certificate x5t\#256
+* Include 'x5c' certificate chain
+* Include 'x5u' certificate URL
+
+A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
+Enabling all of the setting will produce a header with the following structure:
+
+```
+{
+  "jku": "https://axway.com/api/jwk_uri",
+  "typ": "JOSE",
+  "jwk": {
+    "kty": "RSA",
+    "x5t#S256": "3WcxVjJWOUxIIgMmLOf20hj-lR2qn-mwXZHIU8D9CAk",
+    "e": "AQAB",
+    "x5t": "2pdrqe1djoNnHxebh_MfLYl3hFg",
+    "kid": "CN=Change this for production",
+    "x5c": [
+      "MIICwzCCAasCBgE6HBsdpzANBgkqhkiG9w0BAQUFADAlMSMwIQYDVQQDExpDaGFuZ2UgdGhpcyBmb3IgcHJvZHVjdGlvbjAeFw0xMjEwMDExMTMyMDBaFw0zNzEwMDExMTMyMDBaMCUxIzAhBgNVBAMTGkNoYW5nZSB0aGlzIGZvciBwcm9kdWN0aW9uMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm2I2+GHcXXzwyjqMP6E4shjxfpAfgqbCY/nF5oTq0SkcRKvsdJzuLbmufkqx1rQqxwF/aZnbZppcVtR4TAhExmo2NnV7WjSwdd+EynQJrkWlsuK1UQ3JHMo5iAAEQ11xoMBIsUwfg5HYKCELmjnWetwhm5aUJ9Gq45v9kzeZki2oCoVe5LQfVVHEYssr+SfVrhi6+OffeefgCRse6vv5T4zlh4xXKDNUsBxYYB3Vg97tDcdgpfx8BudpBx+1ITk9Dazu8eegXN5KdRqJGgM5LSRIWjK+OumR1a2ReUcXlglWTVfsG43UUUby2bql3E3uc7XpxzQaPpt4aDqfOYMUxwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQAl+yHca9jCZ/zVgtITGWGKQiNb8UqFJE+QxmLt+j2lEWpG3Fd1M40faRrDujbk8WvG4Iz/NamlvvkbpbMSRY67lPpjsZOKlezTTE2YQTtyuFT7QQTYHYPZWK4Dg8QisMI5vHnrzsPc9ZAHm+IZrxbuVXsZQoU7qyaMdG27WWVa6vJ4nXjuMO6sOtl+UnEXpn3vCpNzkkbJW2LvFCs0Ymnx7Wet3inskOKg//AGuv+m3rD/Byphd8Iblt3jSNDwMcG+Yhpi/Wd50iMFFkTnrkEmosvqWL5j6N7eJZszgdL7Zz9ztASutzU4a0YFpv111NxpBdNpphOVED85IbRHxTjL"
+    ],
+    "x5u": "https://axway.com/path/to/cert",
+    "n": "m2I2-GHcXXzwyjqMP6E4shjxfpAfgqbCY_nF5oTq0SkcRKvsdJzuLbmufkqx1rQqxwF_aZnbZppcVtR4TAhExmo2NnV7WjSwdd-EynQJrkWlsuK1UQ3JHMo5iAAEQ11xoMBIsUwfg5HYKCELmjnWetwhm5aUJ9Gq45v9kzeZki2oCoVe5LQfVVHEYssr-SfVrhi6-OffeefgCRse6vv5T4zlh4xXKDNUsBxYYB3Vg97tDcdgpfx8BudpBx-1ITk9Dazu8eegXN5KdRqJGgM5LSRIWjK-OumR1a2ReUcXlglWTVfsG43UUUby2bql3E3uc7XpxzQaPpt4aDqfOYMUxw"
+  }
+  "alg": "RS256",
+}
+```
 ## JWT Verify filter
 
 You can use the **JWT Verify** filter to verify a signed JSON Web Token (JWT) with the token payload. Upon successful verification, the **JWT Verify** filter removes the headers and signature of the incoming signed JWT and outputs the original JWT payload. For example, when you verify the following signed JWT payload input:
