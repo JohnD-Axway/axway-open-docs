@@ -21,11 +21,11 @@ A JWS represents the following logical values:
 The signed content is outputted in JWS Compact Serialization format, which is produced by base64 encoding the logical values and concatenating them with periods (`‘.’`) in between. For example:
 
 ```
-{“iss“:“joe“,
+{"iss":"joe",
 
-"exp“:1300819380,
+"exp":1300819380,
 
-"http://example.com/is_root“:true}
+"http://example.com/is_root":true}
 ```
 
 When the JOSE Header, JWS Payload, and JWS Signature is combined as follows:
@@ -91,7 +91,7 @@ If you selected the asymmetric key type, configure the following fields in the *
 | PS384     | RSASSA-PSS using SHA-384 and MGF1 with SHA-384 |
 | PS512     | RSASSA-PSS using SHA-512 and MGF1 with SHA-512 |
 
-The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the cert store this will be validated when the filter is saved. A selector based Alias can only be validated at runtime and an incompatible cert will cause the filter to fail.
+The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store this will be validated when the filter is saved. A selector based Alias can only be validated at runtime and an incompatible certificate will cause the filter to fail.
 
 * **Use Key ID (kid)**: Selecting this checkbox will ad a 'kid' Header Parameter to the JOSE Header part of the token. The "kid** Header Parameter is a hint indicating which key was used to secure the JWS. The following options are available:
     * **Certificate Alias**: The alias of the selected Certificate.
@@ -139,9 +139,9 @@ p0igcN_IoypGlUPQGe77Rw
 The resulting payload output is:
 
 ```
-{“iss“:“joe“,
-"exp“:1300819380,
-"http://example.com/is_root“:true}
+{"iss":"joe",
+"exp":1300819380,
+"http://example.com/is_root":true}
 ```
 
 {{< alert title="Note" color="primary" >}}The **JWT Verify** filter automatically detects whether the input JWT is signed with hash-based message authentication code (HMAC) or asymmetric key and uses the corresponding settings as appropriate. For example, you can configure verification with HMAC or certificate, depending on the type of JWT received as input.{{< /alert >}}
