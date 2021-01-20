@@ -14,27 +14,23 @@ JWS represents digitally signed or MACed content using JSON data structures and 
 
 A JWS represents the following logical values:
 
-* JOSE Header
-* JWS Payload
-* JWS Signature
+* JOSE header
+* JWS payload
+* JWS signature
 
 The signed content is outputted in JWS Compact Serialization format, which is produced by base64 encoding the logical values and concatenating them with periods (`‘.’`) in between. For example:
 
 ```
 {"iss":"joe",
-
 "exp":1300819380,
-
 "http://example.com/is_root":true}
 ```
 
-When the JOSE Header, JWS Payload, and JWS Signature is combined as follows:
+When the JOSE header, JWS payload, and JWS signature is combined as follows:
 
 ```
 BASE64URL(UTF8(JWS Protected Header)) '.'
-
 BASE64URL(JWS Payload) '.'
-
 BASE64URL(JWS Signature)
 ```
 
@@ -42,25 +38,15 @@ The following string is returned:
 
 ```
 eyJhbGciOiJSUzI1NiJ9
-
 .
-
 eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFt
-
 cGxlLmNvbS9pc19yb290Ijp0cnVlfQ
-
 .
-
 cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7
-
 AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4
-
 BAynRFdiuB—f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K
-
 0GarZRmB_eSN9383LcOLn6_dO—xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqv
-
 hJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrB
-
 p0igcN_IoypGlUPQGe77Rw
 ```
 
@@ -73,11 +59,13 @@ Configure the following fields in the **Signature Key and Algorithm** tab:
 
 * **Key type**: Select whether to sign with a private (asymmetric) key or HMAC (symmetric key).
 
+### Asymmetric key type
+
 If you selected the asymmetric key type, configure the following fields in the **Asymmetric** section:
 
-* **Signing key**: Select a certificate with a private key from the certificate store.  The private key is used to sign the payload. The Certificate is used to generate key related headers in the JOSE header
+* **Signing key**: Select a certificate with a private key from the certificate store. The private key is used to sign the payload, while the certificate is used to generate key related headers in the JOSE header.
 * **Selector expression**: Alternatively, enter a selector expression to get the alias of the private key in the certificate store.
-* **Algorithm**: Select the algorithm used to sign the JWT. The available algorithms are listed in the following table.
+* **Algorithm**: Select the algorithm used to sign the JWT. The available algorithms are listed in the following table:
 
 | Algorithm | description                                    |
 |-----------|------------------------------------------------|
@@ -91,13 +79,15 @@ If you selected the asymmetric key type, configure the following fields in the *
 | PS384     | RSASSA-PSS using SHA-384 and MGF1 with SHA-384 |
 | PS512     | RSASSA-PSS using SHA-512 and MGF1 with SHA-512 |
 
-The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store this will be validated when the filter is saved. A selector based Alias can only be validated at runtime and an incompatible certificate will cause the filter to fail.
+The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store, this will be validated when the filter is saved. A selector based alias can only be validated at runtime, and an incompatible certificate will cause the filter to fail.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a 'kid' Header Parameter to the JOSE Header part of the token. The "kid** Header Parameter is a hint indicating which key was used to secure the JWS. The following options are available:
+* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which shared key was used to secure the JWS. The following options are available:
     * **Certificate Alias**: The alias of the selected Certificate.
     * **x5t Certificate Thumbrint**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
     * **x5t#S256 Certificate Thumbprint**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
     * **Custom Key ID**: a static string or selector expression can be used to set a key id that has a contextual meaning.
+
+### Symmetric key type
 
 If you selected the symmetric key type, complete the following fields in the **Symmetric** section:
 
@@ -116,7 +106,7 @@ If you selected the symmetric key type, complete the following fields in the **S
 
 * **Algorithm**: Select the algorithm used to sign.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a 'kid' Header Parameter to the JOSE Header part of the token. The "kid** Header Parameter is a hint indicating which shared was was used to secure the JWS. This value can be defined as a static string or a selector expression.
+* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which shared key was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ## JWT Verify filter
 
@@ -157,12 +147,12 @@ Enter the selector expression to retrieve the JWT to be verified. This must cont
 You can configure the following optional settings in the **Verify using RSA/EC public key** section:
 
 **X509 certificate**:
-Select the certificate that is used to verify the payload from the API Gateway certificate store.
+Select the certificate that is used to verify the payload from the certificate store.
 
 {{< alert title="Note" color="primary" >}}Asymmetric keys are associated with the x509 certificate, but for verification, you only need the public key, which is encoded in the certificate. Alternatively, you can use a JSON Web Key (JWK) with a **Connect to URL** filter to download the key from a known source.{{< /alert >}}
 
 **Selector expression**:
-Alternatively, enter a selector expression to retrieve the alias of the certificate from the API Gateway certificate store.
+Alternatively, enter a selector expression to retrieve the alias of the certificate from the certificate store.
 
 You can configure the following optional settings in the **Verify using symmetric key** section:
 
