@@ -81,7 +81,7 @@ If you selected the asymmetric key type, configure the following fields in the *
 
 The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store, this will be validated when the filter is saved. A selector based alias can only be validated at runtime, and an incompatible certificate will cause the filter to fail.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which shared key was used to secure the JWS. The following options are available:
+* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. The following options are available:
     * **Certificate Alias**: The alias of the selected Certificate.
     * **x5t Certificate Thumbrint**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
     * **x5t#S256 Certificate Thumbprint**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
@@ -104,9 +104,9 @@ If you selected the symmetric key type, complete the following fields in the **S
     * Byte array (possibly produced by a different filter)
     * Base64-encoded byte array
 
-* **Algorithm**: Select the algorithm used to sign.
+* **Algorithm**: Select the algorithm used to protect the token.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which shared key was used to secure the JWS. This value can be defined as a static string or a selector expression.
+* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ## JWT Verify filter
 
