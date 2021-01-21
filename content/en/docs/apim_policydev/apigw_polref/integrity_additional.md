@@ -56,6 +56,7 @@ Configure the following settings on the **JWT Sign** window:
 * **Token location**: Enter the selector expression to obtain the payload to be signed. The content can be JWT claims, encrypted token, or you can enter a different option.
 
 ### Signature Key and Algorithm
+
 On the Signature Key and Algorithm tab, you can select either a symmetric or an asymmetric key to sign the JWT. Select the appropriate radio button and configure the fields in the corresponding section.
 
 * **Key type**: Select whether to sign with a private (asymmetric) key or HMAC (symmetric key).
@@ -110,6 +111,7 @@ If you selected the symmetric key type, complete the following fields in the **S
 * **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ### Signature JOSE Header
+
 This tab configures which claims are present in the JWT Header.
 The following header options can be enabled or disabled:
 
