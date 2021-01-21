@@ -110,8 +110,9 @@ If you selected the symmetric key type, complete the following fields in the **S
 * **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ### Signature JOSE Header
-This tab configures which claims are present in the JWT Header. 
+This tab configures which claims are present in the JWT Header.
 The following header options can be enabled or disabled:
+
 * Generate 'typ' claim
 * JWK Set URL
 * Certificate specific header claims (Asymmetric key only)
@@ -143,6 +144,7 @@ Enabling all of the setting will produce a header with the following structure:
   "alg": "RS256",
 }
 ```
+
 ## JWT Verify filter
 
 You can use the **JWT Verify** filter to verify a signed JSON Web Token (JWT) with the token payload. Upon successful verification, the **JWT Verify** filter removes the headers and signature of the incoming signed JWT and outputs the original JWT payload. For example, when you verify the following signed JWT payload input:
