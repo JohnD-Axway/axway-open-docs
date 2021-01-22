@@ -121,7 +121,7 @@ The following header options can be enabled or disabled:
 * Generate 'x5t' thumbprint, derived from the signing certificate
 * Compute Certificate x5t\#256, derived from the signing certificate
 * Include 'x5c' certificate chain, derived from the signing certificate
-* Include 'x5u' certificate URL, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail. 
+* Include 'x5u' certificate URL, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail.
 
 A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
 Enabling all of the setting will produce a header with the following structure:
