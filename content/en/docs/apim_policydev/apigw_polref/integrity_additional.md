@@ -83,11 +83,11 @@ If you selected the asymmetric key type, configure the following fields in the *
 
 The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store, this will be validated when the filter is saved. A selector based alias can only be validated at runtime, and an incompatible certificate will cause the filter to fail.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. The following options are available:
-    * **Certificate Alias**: The alias of the selected Certificate.
-    * **x5t Certificate Thumbrint**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
-    * **x5t#S256 Certificate Thumbprint**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
-    * **Custom Key ID**: a static string or selector expression can be used to set a key id that has a contextual meaning.
+* **Use Key ID (kid)**: Selecting this checkbox will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. The following options are available:
+    * **Use Cert Alias**: The alias of the selected Certificate.
+    * **Compute Cert x5t**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
+    * **Compute Cert x5t#256**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
+    * **Selector Expression**: A static string or selector expression can be used to set a custom key id that has a contextual meaning.
 
 ### Symmetric key type
 
@@ -108,20 +108,20 @@ If you selected the symmetric key type, complete the following fields in the **S
 
 * **Algorithm**: Select the algorithm used to protect the token.
 
-* **Use Key ID (kid)**: Selecting this checkbox will ad a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
+* **Use Key ID (kid)**: Selecting this checkbox will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ### Signature JOSE Header
 
 This tab configures which claims are present in the JWT Header.
 The following header options can be enabled or disabled:
 
-* Generate 'typ' claim.
-* JWK Set URL (jku), A selector can be used to specify the jku, if the selector evaluates as empty or null the filter will fail.
-* Embed all key related claims in the 'jwk' claim (except for 'jku'), if this is selected all of the following header claims will be embedded in a JWK object within the header.
-* Generate 'x5t' thumbprint, derived from the signing certificate
-* Compute Certificate x5t\#256, derived from the signing certificate
-* Include 'x5c' certificate chain, derived from the signing certificate
-* Include 'x5u' certificate URL, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail.
+* **Generate 'typ' claim**.
+* **JWK Set URL (jku)**, A selector can be used to specify the jku, if the selector evaluates as empty or null the filter will fail.
+* **Embed all key related claims in the 'jwk' claim (except for 'jku')**, if this is selected all of the following header claims will be embedded in a JWK object within the header.
+* **Generate 'x5t' thumbprint**, SHA1 humbprint derived from the signing certificate
+* **Generate 'x5t#256' thumbprint**, SHA256 thumbprint derived from the signing certificate
+* **Include 'x5c' certificate chain**, Adds the PEM encoded certificate chain of the signing certificate
+* **Include 'x5u' certificate URL**, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail.
 
 A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
 Enabling all of the setting will produce a header with the following structure:
