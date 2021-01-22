@@ -118,9 +118,9 @@ The following header options can be enabled or disabled:
 * **Generate 'typ' claim**.
 * **JWK Set URL (jku)**, A selector can be used to specify the jku, if the selector evaluates as empty or null the filter will fail.
 * **Embed all key related claims in the 'jwk' claim (except for 'jku')**, if this is selected all of the following header claims will be embedded in a JWK object within the header.
-* **Generate 'x5t' thumbprint**, SHA1 humbprint derived from the signing certificate
-* **Generate 'x5t#256' thumbprint**, SHA256 thumbprint derived from the signing certificate
-* **Include 'x5c' certificate chain**, Adds the PEM encoded certificate chain of the signing certificate
+* **Generate 'x5t' thumbprint**, SHA1 humbprint derived from the signing certificate.
+* **Generate 'x5t#256' thumbprint**, SHA256 thumbprint derived from the signing certificate.
+* **Include 'x5c' certificate chain**, Adds the PEM encoded certificate chain of the signing certificate.
 * **Include 'x5u' certificate URL**, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail.
 
 A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
