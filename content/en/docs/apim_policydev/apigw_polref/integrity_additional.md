@@ -115,14 +115,13 @@ If you selected the symmetric key type, complete the following fields in the **S
 This tab configures which claims are present in the JWT Header.
 The following header options can be enabled or disabled:
 
-* Generate 'typ' claim
-* JWK Set URL
-* Certificate specific header claims (Asymmetric key only)
-* Embed all key related claims in the 'jwk' claim (except for 'jku')
-* Generate 'x5t' thumbprint
-* Compute Certificate x5t\#256
-* Include 'x5c' certificate chain
-* Include 'x5u' certificate URL
+* Generate 'typ' claim,
+* JWK Set URL (jku), A selector can be used to specify the jku, if the selector evaluates as empty or null the filter will fail.
+* Embed all key related claims in the 'jwk' claim (except for 'jku'), if this is selected all of the following header claims will be embedded in a JWK object within the header.
+* Generate 'x5t' thumbprint, derived from the signing certificate
+* Compute Certificate x5t\#256, derived from the signing certificate
+* Include 'x5c' certificate chain, derived from the signing certificate
+* Include 'x5u' certificate URL, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail. 
 
 A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
 Enabling all of the setting will produce a header with the following structure:
