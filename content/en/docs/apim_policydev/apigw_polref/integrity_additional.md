@@ -122,7 +122,7 @@ This tab configures which claims are present in the JWT header. The following he
 * **Include 'x5c' certificate chain**: Adds the PEM encoded certificate chain of the signing certificate.
 * **Include 'x5u' certificate URL**: A selector can be used to specify the `x5u`. If the selector evaluates as empty or null, the filter will fail.
 
-You can find a detailed explanation for each header at [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4). 
+You can find a detailed explanation for each header at [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4).
 
 Enabling all of the settings will produce a header with the following structure:
 
