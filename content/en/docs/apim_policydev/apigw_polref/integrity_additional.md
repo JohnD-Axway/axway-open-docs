@@ -57,49 +57,49 @@ Configure the following settings on the **JWT Sign** window:
 
 ### Signature Key and Algorithm
 
-On the Signature Key and Algorithm tab, you can select either a symmetric or an asymmetric key to sign the JWT. Select the appropriate radio button and configure the fields in the corresponding section.
+On the **Signature Key and Algorithm** tab, you can select either a symmetric or an asymmetric key to sign the JWT. Select the appropriate option and configure the fields in the corresponding section.
 
-* **Key type**: Select whether to sign with a private (asymmetric) key or HMAC (symmetric key).
+* **Key type**: Select whether to sign with a private key (asymmetric) or HMAC (symmetric key).
 
-### Asymmetric key type
+#### Asymmetric key type
 
 If you selected the asymmetric key type, configure the following fields in the **Asymmetric** section:
 
 * **Signing key**: Select a certificate with a private key from the certificate store. The private key is used to sign the payload, while the certificate is used to generate key related headers in the JOSE header.
 * **Selector expression**: Alternatively, enter a selector expression to get the alias of the private key in the certificate store.
-* **Algorithm**: Select the algorithm used to sign the JWT. The available algorithms are listed in the following table:
+* **Algorithm**: Select one of the available algorithms to sign the JWT.
 
-| Algorithm | description                                    |
-|-----------|------------------------------------------------|
-| ES256     | ECDSA using P-256 and SHA-256                  |
-| ES384     | ECDSA using P-384 and SHA-384                  |
-| ES512     | ECDSA using P-521 and SHA-512                  |
-| RS256     | RSASSA-PKCS1-v1_5 using SHA-256                |
-| RS384     | RSASSA-PKCS1-v1_5 using SHA-384                |
-| RS512     | RSASSA-PKCS1-v1_5 using SHA-512                |
-| PS256     | RSASSA-PSS using SHA-256 and MGF1 with SHA-256 |
-| PS384     | RSASSA-PSS using SHA-384 and MGF1 with SHA-384 |
-| PS512     | RSASSA-PSS using SHA-512 and MGF1 with SHA-512 |
+  | Algorithm | Description                                    |
+  |-----------|------------------------------------------------|
+  | ES256     | ECDSA using P-256 and SHA-256                  |
+  | ES384     | ECDSA using P-384 and SHA-384                  |
+  | ES512     | ECDSA using P-521 and SHA-512                  |
+  | RS256     | RSASSA-PKCS1-v1_5 using SHA-256                |
+  | RS384     | RSASSA-PKCS1-v1_5 using SHA-384                |
+  | RS512     | RSASSA-PKCS1-v1_5 using SHA-512                |
+  | PS256     | RSASSA-PSS using SHA-256 and MGF1 with SHA-256 |
+  | PS384     | RSASSA-PSS using SHA-384 and MGF1 with SHA-384 |
+  | PS512     | RSASSA-PSS using SHA-512 and MGF1 with SHA-512 |
 
-The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store, this will be validated when the filter is saved. A selector based alias can only be validated at runtime, and an incompatible certificate will cause the filter to fail.
+  The selected algorithm must be compatible with the selected certificate. When a certificate is selected from the certificate store, this will be validated when the filter is saved. A selector based alias can only be validated at runtime, and an incompatible certificate will cause the filter to fail.
 
-* **Use Key ID (kid)**: Selecting this checkbox will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. The following options are available:
+* **Use Key ID (kid)**: Selecting this option will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. The following options are available:
     * **Use Cert Alias**: The alias of the selected Certificate.
     * **Compute Cert x5t**: A Base64Url encoded SHA1 digest (thumbprint) of the DER encoded X509 Certificate.
     * **Compute Cert x5t#256**: A Base64Url encoded SHA256 digest (thumbprint) of the DER encoded X509 Certificate.
-    * **Selector Expression**: A static string or selector expression can be used to set a custom key id that has a contextual meaning.
+    * **Selector Expression**: A static string or selector expression can be used to set a custom key ID that has a contextual meaning.
 
-### Symmetric key type
+#### Symmetric key type
 
-If you selected the symmetric key type, complete the following fields in the **Symmetric** section:
+If you selected the **Symmetric key type** option, complete the following fields in the **Symmetric** section:
 
 * **Shared key**: Enter the shared key used to sign the payload. The key should be given as a base64-encoded byte array and must use the following minimum lengths depending on the selected algorithm used to sign:
 
-| Algorithm                  | Minimum key length  |
-|----------------------------|---------------------|
-| HMAC using SHA-256 (HS256) | 32 bytes (256 bits) |
-| HMAC using SHA-384 (HS384) | 48 bytes (384 bits) |
-| HMAC using SHA-512 (HS512) | 64 bytes (512 bits) |
+  | Algorithm                  | Minimum key length  |
+  |----------------------------|---------------------|
+  | HMAC using SHA-256 (HS256) | 32 bytes (256 bits) |
+  | HMAC using SHA-384 (HS384) | 48 bytes (384 bits) |
+  | HMAC using SHA-512 (HS512) | 64 bytes (512 bits) |
 
 * **Selector expression**: Alternatively, enter a selector expression to obtain the shared key. The value returned from the selector should contain:
 
@@ -108,23 +108,23 @@ If you selected the symmetric key type, complete the following fields in the **S
 
 * **Algorithm**: Select the algorithm used to protect the token.
 
-* **Use Key ID (kid)**: Selecting this checkbox will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
+* **Use Key ID (kid)**: Selecting this option will add a `kid` header parameter to the JOSE header part of the token. The `kid` header parameter is a hint indicating which public/private key pair was used to secure the JWS. This value can be defined as a static string or a selector expression.
 
 ### Signature JOSE Header
 
-This tab configures which claims are present in the JWT Header.
-The following header options can be enabled or disabled:
+This tab configures which claims are present in the JWT header. The following header options can be enabled or disabled:
 
 * **Generate 'typ' claim**.
-* **JWK Set URL (jku)**, A selector can be used to specify the jku, if the selector evaluates as empty or null the filter will fail.
-* **Embed all key related claims in the 'jwk' claim (except for 'jku')**, if this is selected all of the following header claims will be embedded in a JWK object within the header.
-* **Generate 'x5t' thumbprint**, SHA1 humbprint derived from the signing certificate.
-* **Generate 'x5t#256' thumbprint**, SHA256 thumbprint derived from the signing certificate.
-* **Include 'x5c' certificate chain**, Adds the PEM encoded certificate chain of the signing certificate.
-* **Include 'x5u' certificate URL**, A selector can be used to specify the x5u, if the selector evaluates as empty or null the filter will fail.
+* **JWK Set URL (jku)**: A selector can be used to specify the `jku`. If the selector evaluates as empty or null, the filter will fail.
+* **Embed all key related claims in the 'jwk' claim (except for 'jku')**: If this is selected, all of the following header claims will be embedded in a JWK object within the header.
+* **Generate 'x5t' thumbprint**: SHA1 thumbprint derived from the signing certificate.
+* **Generate 'x5t#256' thumbprint**: SHA256 thumbprint derived from the signing certificate.
+* **Include 'x5c' certificate chain**: Adds the PEM encoded certificate chain of the signing certificate.
+* **Include 'x5u' certificate URL**: A selector can be used to specify the `x5u`. If the selector evaluates as empty or null, the filter will fail.
 
-A detailed explanation for each header can be found in the [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4)
-Enabling all of the setting will produce a header with the following structure:
+You can find a detailed explanation for each header at [JWS RFC 7515](https://tools.ietf.org/html/rfc7515#section-4). 
+
+Enabling all of the settings will produce a header with the following structure:
 
 ```
 {
