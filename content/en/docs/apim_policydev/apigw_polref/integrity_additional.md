@@ -186,6 +186,15 @@ This tab allows you to configure the following settings:
 * **Alternate JWT Audiences**: Allows to set the JWT `aud` value to be an array of case-sensitive strings, each string containing a StringOrURI value.
 * **Extend JWT Payload using a Policy**: Select a policy that when called, the contents of its invocation are added to the JWT Payload.
 
+### Output
+The output tab allows the configuration of how the filter returns a JWS object. It is possible to:
+
+* **Set an attribute with the generated signature**: This option takes as a parameter an **Attribute Name**. When the filter completes the JWS will be accessible in that attribute through the use of a selector.
+* **Add the generated signature to an HTTP Header**: This option sets the JWS as an HTTP header on the current circuit Message. A text box is provided to specify the header name. The filter can be configured to **Overwrite existing value** if the header already exists, if this option is disabled the header will be appended creating multiple headers of the same name. With the remaining options the header can be stored with the body (${content.body}) by choosing **Use body headers** or in a distinct headers message attribute (${http.headers}) by choosing **Use message headers**.
+* **Detach signature with unencoded payload** Detaching the signature will create a JWS token in the format <header>..<signature>. The payload will be stored in a separate message attribute to be returned to the user (typically content.body). See [Appendix F of RFC 7515](https://tools.ietf.org/html/rfc7515#appendix-F) for a description of this JWS option. This payload will be unencoded and the JWS header will contain a header specifying b64=false as per [RFC 7797 Unencoded Payload Option](https://tools.ietf.org/html/rfc7797). This option is used when signing a json response and supports the OBIE Open Banking message signing specification.
+
+Please note that the message attribute names for **generated signature** and **detached signature payload** must be distinct from one another. Using the same attribute name will result in a validation error in Policy Studio.
+
 ## JWT Verify filter
 
 You can use the **JWT Verify** filter to verify a signed JSON Web Token (JWT) with the token payload. Upon successful verification, the **JWT Verify** filter removes the headers and signature of the incoming signed JWT and outputs the original JWT payload. For example, when you verify the following signed JWT payload input:
