@@ -187,6 +187,7 @@ This tab allows you to configure the following settings:
 * **Extend JWT Payload using a Policy**: Select a policy that when called, the contents of its invocation are added to the JWT Payload.
 
 ### Output
+
 The output tab allows the configuration of how the filter returns a JWS object. It is possible to:
 
 * **Set an attribute with the generated signature**: This option takes as a parameter an **Attribute Name**. When the filter completes the JWS will be accessible in that attribute through the use of a selector.
