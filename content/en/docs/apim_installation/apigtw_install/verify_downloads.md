@@ -15,7 +15,6 @@ API Gateway installers and updates are signed using PGP to prove authenticity an
 * You have downloaded the required file and it's related .asc signature file from [Axway Support](https://support.axway.com).
 * You have downloaded the public PGP key file (axwaypgp.asc) from [Axway Support](https://support.axway.com).
 
-
 ## Import PGP Key
 
 ```
@@ -37,4 +36,3 @@ gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 6800 AEEC B8DE 55EC 5A17  47F9 1B43 3523 955D 3C69
 ```
- 
