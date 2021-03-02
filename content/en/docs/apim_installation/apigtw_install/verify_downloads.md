@@ -1,9 +1,9 @@
 {
 "title": "Verify Downloads",
   "linkTitle": "VerifyDownloads",
-  "weight": "1 ",
+  "weight": "1",
   "date": "2021-03-02",
-  "description": "Verify Installer and update downloads using PGP."
+  "description": "Verify installers and updates using PGP."
 }
 
 ## Signed deliverables
