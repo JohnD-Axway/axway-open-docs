@@ -3,7 +3,7 @@
   "linkTitle": "VerifyDownloads",
   "weight": "1",
   "date": "2021-03-02",
-  "description": "Verify installers and updates using PGP."
+  "description": "Verify installers and updates using PGP (Pretty Good Privacy)."
 }
 
 ## Signed deliverables
