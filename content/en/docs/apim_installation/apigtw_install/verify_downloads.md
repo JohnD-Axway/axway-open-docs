@@ -14,7 +14,7 @@ API Gateway installers and updates are signed using PGP to prove authenticity an
 
 * You have downloaded the required file and it's related .asc signature file from [Axway Support](https://support.axway.com).
 * You have downloaded the public PGP key file (axwaypgp.asc) from [Axway Support](https://support.axway.com).
-* The GNU Privacy Guard (gpg) tool is installed on the local system.
+* The GNU Privacy Guard (gpg) tool is installed on the local system. GPG4Win is available for the windows platform.
 
 ## Import PGP Key
 
@@ -23,12 +23,23 @@ Use the gpg tool to import Axways public code signing PGP key axwaypgp.asc. Opti
 ```
 gpg --import axwaypgp.asc
 // to enforce trustability of the key
-// gpg --edit-key product.security.group@axway.com trust
+gpg --edit-key product.security.group@axway.com trust
 ```
 
 ## Verify a detached signature
 
-Use the gpg tool to verify a downloads signature, example:
+Use the gpg tool to verify a downloads signature.
+
+```
+gpg --verify installer.tar.gz.asc installer.tar.gz
+
+gpg: Signature made Mon 22 Feb 2021 13:40:22 GMT
+gpg:                using RSA key 1B433523955D3C69
+gpg: Good signature from "AXWAY PGP KEY (Code Signing) <product.security.group@axway.com>" [ultimate]
+gpg:                 aka "product.security.group@axway.com" [ultimate]
+```
+
+If the key has not been explicitly trusted the result will contain a warning, but the signature will still be shown as valid.
 
 ```
 gpg --verify installer.tar.gz.asc installer.tar.gz
