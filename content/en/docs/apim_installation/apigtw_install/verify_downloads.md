@@ -28,7 +28,7 @@ gpg --edit-key product.security.group@axway.com trust
 
 ## Verify a detached signature
 
-Use the gpg tool to verify the signature of a downloaded file.
+Use the PGP tool to verify the signature of a downloaded file.
 
 ```
 gpg --verify installer.tar.gz.asc installer.tar.gz
