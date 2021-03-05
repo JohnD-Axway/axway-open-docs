@@ -14,11 +14,11 @@ API Gateway installers and updates are signed using PGP to prove authenticity an
 
 * You have downloaded the required file and it's related .asc signature file from [Axway Support](https://support.axway.com).
 * You have downloaded the public PGP key file (axwaypgp.asc) from [Axway Support](https://support.axway.com).
-* The GNU Privacy Guard (gpg) tool is installed on the local system. GPG4Win is available for the windows platform.
+* A tool to verify PGP signature is installed.
 
 ## Import PGP Key
 
-Use the gpg tool to import Axways public code signing PGP key axwaypgp.asc. Optionally use the gpg --edit-key option to assign a trust level to the key.
+Use the PGP tool to import Axways public code signing PGP key axwaypgp.asc. The examples below use GNU Privacy Guard (gpg). Optionally use the gpg --edit-key option to assign a trust level to the key.
 
 ```
 gpg --import axwaypgp.asc
@@ -28,7 +28,7 @@ gpg --edit-key product.security.group@axway.com trust
 
 ## Verify a detached signature
 
-Use the gpg tool to verify a downloads signature.
+Use the gpg tool to verify the signature of a downloaded file.
 
 ```
 gpg --verify installer.tar.gz.asc installer.tar.gz
