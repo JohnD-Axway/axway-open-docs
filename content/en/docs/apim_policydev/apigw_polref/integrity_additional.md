@@ -179,7 +179,7 @@ The following options allow to add claims to support OpenID Connect.
 
 ### Advanced (JWS/JWT)
 
-This tab allows you to configure the following settings:
+You can configure the following settings in this tab:
 
 * **Critical extensions (crit)**: Set of values to add to the `crit` header.
 * **Extend JWS Header using a Policy**: Select a policy that when called, the contents of its invocation are added to the JWS Header.
@@ -188,13 +188,19 @@ This tab allows you to configure the following settings:
 
 ### Output
 
-The output tab allows the configuration of how the filter returns a JWS object. It is possible to:
+From the **Output** tab you can configure how the filter returns a JWS object. You can configure the following options:
 
-* **Set an attribute with the generated signature**: This option takes as a parameter an **Attribute Name**. When the filter completes the JWS will be accessible in that attribute through the use of a selector.
-* **Add the generated signature to an HTTP Header**: This option sets the JWS as an HTTP header on the current circuit Message. A text box is provided to specify the header name. The filter can be configured to **Overwrite existing value** if the header already exists, if this option is disabled the header will be appended creating multiple headers of the same name. With the remaining options the header can be stored with the body (${content.body}) by choosing **Use body headers** or in a distinct headers message attribute (${http.headers}) by choosing **Use message headers**.
-* **Detach signature with unencoded payload** Detaching the signature will create a JWS token in the format ```<header>..<signature>```. The payload will be stored in a separate message attribute to be returned to the user (typically content.body). See [Appendix F of RFC 7515](https://tools.ietf.org/html/rfc7515#appendix-F) for a description of this JWS option. This payload will be unencoded and the JWS header will contain a header specifying b64=false as per [RFC 7797 Unencoded Payload Option](https://tools.ietf.org/html/rfc7797). This option is used when signing a json response and supports the OBIE Open Banking message signing specification.
+* **Set an attribute with the generated signature**: Takes an **Attribute Name** as a parameter. When the filter completes, the JWS object will be accessible in that attribute through the use of a selector.
+* **Add the generated signature to an HTTP Header**: Sets the JWS as an HTTP header on the current circuit Message. You must enter the header name, and select one of the following options:
+    * **Overwrite existing value**: Select this option if the header already exists. If this option is disabled, the header will be appended creating multiple headers of the same name.
+    * **Use body headers**: The header is stored with the body, `${content.body}`.
+    * **Use message headers**: The header is stored in a distinct headers message attribute, `${http.headers}`.
+* **Detach signature with unencoded payload**: Detaching the payload will create a JWS token in the format `<header>..<signature>`. This payload is stored in a separate message attribute to be returned to the user, typically in the `content.body`. This option is used when signing a JSON response, and it supports the OBIE Open Banking message signing specification.
 
-Please note that the message attribute names for **generated signature** and **detached signature payload** must be distinct from one another. Using the same attribute name will result in a validation error in Policy Studio.
+For more information on JWS Detached Content, see [Appendix F of RFC 7515](https://tools.ietf.org/html/rfc7515#appendix-F). This payload is unencoded, and the JWS header contains a header specifying `b64=false` as described in [RFC 7797 Unencoded Payload Option](https://tools.ietf.org/html/rfc7797).
+
+{{< alert title="Note" color="primary" >}}
+The message attribute names for **Generated signature** and **Detach signature payload** must be distinct from one another. Using the same attribute name will result in a validation error in Policy Studio. {{< /alert >}}
 
 ## JWT Verify filter
 
