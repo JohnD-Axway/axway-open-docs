@@ -1,28 +1,32 @@
 {
-"title": "Verify Downloads",
-  "linkTitle": "VerifyDownloads",
+"title": "Verify PGP signature of downloaded resources",
+  "linkTitle": "Verify PGP signature of downloaded resources",
   "weight": "1",
   "date": "2021-03-02",
-  "description": "Verify installers and updates using PGP (Pretty Good Privacy)."
+  "description": "Verify installers and updates using Pretty Good Privacy (PGP)."
 }
 
-## Signed deliverables
+API Gateway installers and updates are signed using Pretty Good Privacy (PGP) to prove authenticity and ensure integrity. This topic explains how you can use Axway's public PGP key to verify the signature of Axway's resources.
 
-API Gateway installers and updates are signed using PGP to prove authenticity and ensure integrity. This document explains how to verify the signature using Axways public PGP key. Signatures are detached and are provided in a file with the same name as the original file but with .asc appended to the filename.
+You can find the signatures, which are files with the same name as the original file, but with `.asc` appended to their filenames, in each Axway resources package.
 
 ## Prerequisites
 
-* You have downloaded the required file and it's related .asc signature file from [Axway Support](https://support.axway.com).
-* You have downloaded the public PGP key file (axwaypgp.asc) from [Axway Support](https://support.axway.com).
+* You have downloaded the [required file](/docs/apim_installation/apigtw_install/installation/#prerequisites) and its related `.asc` signature file from [Axway Support](https://support.axway.com).
+* You have downloaded the public PGP key file (`axwaypgp.asc`) from [Axway Support](https://support.axway.com).
 * A tool to verify PGP signature is installed.
 
-## Import PGP Key
+## Import Axway PGP key
 
-Use the PGP tool to import Axways public code signing PGP key axwaypgp.asc. The examples below use GNU Privacy Guard (gpg). Optionally use the gpg --edit-key option to assign a trust level to the key.
+You can use a PGP tool to import Axway's public code signing PGP key, `axwaypgp.asc`. The examples below uses the GNU Privacy Guard (GPG).
 
 ```
 gpg --import axwaypgp.asc
-// to enforce trustability of the key
+```
+
+Optionally, you can use the `gpg --edit-key` option to assign a trust level to the key.
+
+```
 gpg --edit-key product.security.group@axway.com trust
 ```
 
@@ -39,7 +43,7 @@ gpg: Good signature from "AXWAY PGP KEY (Code Signing) <product.security.group@a
 gpg:                 aka "product.security.group@axway.com" [ultimate]
 ```
 
-If the key has not been explicitly trusted the result will contain a warning, but the signature will still be shown as valid.
+If the key has not been explicitly trusted, the result will contain a warning, but the signature will still be shown as valid.
 
 ```
 gpg --verify installer.tar.gz.asc installer.tar.gz
