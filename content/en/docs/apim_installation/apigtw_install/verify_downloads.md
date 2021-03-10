@@ -18,7 +18,7 @@ You can find the signatures, which are files with the same name as the original 
 
 ## Import Axway PGP key
 
-You can use a PGP tool to import Axway's public code signing PGP key, `axwaypgp.asc`. The examples below uses the GNU Privacy Guard (GPG).
+You can import Axway's code signing PGP key with a PGP tool. The following example uses the GNU Privacy Guard (GPG).
 
 ```
 gpg --import axwaypgp.asc
