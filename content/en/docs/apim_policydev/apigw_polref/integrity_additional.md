@@ -236,6 +236,20 @@ You can configure the following settings on the **JWT Verify** dialog:
 
 **Token location**: Enter the selector expression to retrieve the JWT to be verified. This must contain the value of token in the format of `HEADER.PAYLOAD.SIGNATURE`, but without the `Bearer` prefix. You can use a filter, such as [Retrieve attribute from HTTP header](/docs/apim_policydev/apigw_polref/attributes_retrieve/#retrieve-from-http-header-filter), in your policy to get the token from any header. For example: `${http.headers["Authorization"].substring(7)}`
 
+### Key and Algorithm
+
+On the **Key and Algorithm** tab you can configure the location of the verification key for validation the JWS token. There are two options for selecting the key, **Call Policy to discover key** and **Select static key or selector**
+
+#### Key Discovery
+
+The Key discovery option allows you to select a policy to find the appropriate key forto verify a JWS Token. Before the policy is called two message variables are created containing the JWS header and payload, _'jws.header'_ and _'jws.payload'_ respectively. These message attributes can be used in the discovery policy to locate the correct key. For example, _'${jws.header.jku}'_ could be used with the Connect to Url filter to retrieve a JWK (JSON Web Key) from an external source, similarly _'${jws.header.x5u}'_ could be used to retrieve a PEM encoded cert from an external source. Other useful headers for identifying the key are: y_'${jws.header.kid}'_ or _'${jws.header.jwk}'_. _${jws.payload}_ may be used to identify the subject of the JWS and a key may be retrieved from a data source such as the KPS.
+
+The discovery policy **must** return the key in either JWK or PEM format. The JWK could be a single JWK or a JWK Set, the PEM could be a PEM encoded X.509 certificate or and RSA Public key.
+
+#### Static key or selector
+
+The static key option allows you to directly specify a certificate for asymmetric keys, or a shared secret for HMAC base JWS tokens or a JWK. Each of these options can be explicitly enabled or disabled. At run time the filter will identify the appropriate key based on the algorithm in the token header, if an assymmetric or symmetric key is not available the filter will use the JWK.
+
 You can configure the following optional settings in the **Verify using RSA/EC public key** section:
 
 **X509 certificate**: Select the certificate that is used to verify the payload from the certificate store.
@@ -259,7 +273,8 @@ You can configure the following optional setting in the **JWK from external sour
 
 **JSON web key**: You can verify signed tokens using a selector expression containing the value of a `JSON Web Key (JWK)`. The return type of the selector expression must be of type String.
 
-**Accepted Algorithms**: This list is populated with all the algorithms available for JWT signing, and it requires at least one algorithm to be selected. The selected algorithms will be validated against the "alg" header of the JWT token being processed. If none are selected, the following message is displayed, **You must enter a value for 'Accepted Algorithms'.**
+#### Algorithms
+The final section of the Keys and Algorithm tab is the list of **Accepted Algorithms**. This list is populated with all the algorithms available for JWT signing, and it requires at least one algorithm to be selected. The selected algorithms will be validated against the "alg" header of the JWT token being processed. If none are selected, the following message is displayed, **You must enter a value for 'Accepted Algorithms'.**
 
 The runtime validation works as follows:
 
@@ -267,6 +282,8 @@ The runtime validation works as follows:
 * Fail with `reason: The JWS token is not correct`, if the "alg" value of the incoming JWT is null.
 * Fail with `reason: The JWS token is not correct`, if there is no "alg" value in the incoming JWT.
 * Fail with `reason: Alg received not supported in the 'Accepted Algorithms' list defined in the JWT verification filter`, if the "alg" value of the incoming JWT is not selected from the list of accepted algorithms.
+
+
 
 **Critical Headers**: You can add a list of acceptable “crit” headers (list of JWT claims), which will be validated against the list of claims present in the “crit” header of the JWT token being processed.
 
