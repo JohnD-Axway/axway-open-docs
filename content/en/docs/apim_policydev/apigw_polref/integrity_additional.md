@@ -274,6 +274,7 @@ You can configure the following optional setting in the **JWK from external sour
 **JSON web key**: You can verify signed tokens using a selector expression containing the value of a `JSON Web Key (JWK)`. The return type of the selector expression must be of type String.
 
 #### Algorithms
+
 The final section of the Keys and Algorithm tab is the list of **Accepted Algorithms**. This list is populated with all the algorithms available for JWT signing, and it requires at least one algorithm to be selected. The selected algorithms will be validated against the "alg" header of the JWT token being processed. If none are selected, the following message is displayed, **You must enter a value for 'Accepted Algorithms'.**
 
 The runtime validation works as follows:
@@ -282,8 +283,6 @@ The runtime validation works as follows:
 * Fail with `reason: The JWS token is not correct`, if the "alg" value of the incoming JWT is null.
 * Fail with `reason: The JWS token is not correct`, if there is no "alg" value in the incoming JWT.
 * Fail with `reason: Alg received not supported in the 'Accepted Algorithms' list defined in the JWT verification filter`, if the "alg" value of the incoming JWT is not selected from the list of accepted algorithms.
-
-
 
 **Critical Headers**: You can add a list of acceptable “crit” headers (list of JWT claims), which will be validated against the list of claims present in the “crit” header of the JWT token being processed.
 
