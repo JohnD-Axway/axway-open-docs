@@ -240,7 +240,7 @@ You can configure the following settings on the **JWT Verify** dialog:
 
 On the **Key and Algorithm** tab you can configure the location of the verification key, which validates the JWS token. You can choose one of these two options for selecting the key, **Call Policy to discover key** or **Select static key or selector**.
 
-#### Key Discovery
+#### Call policy to discover key
 
 Use this option to select a policy to find the appropriate key to verify a JWS Token. Before the policy is called, two message attributes are created containing the JWS header and payload, `jws.header` and `jws.payload`, respectively. You can use these attributes in the discovery policy to locate the correct key.
 
@@ -254,7 +254,7 @@ Other useful headers for identifying the key are: `${jws.header.kid}` and `${jws
 
 The discovery policy *must* return the key in either JWK or PEM format. The JWK could be a single JWK or a JWK set, the PEM could be a PEM encoded X.509 certificate or an RSA Public key.
 
-#### Static key or selector
+#### Select static key or selector
 
 This option allows you to directly specify a certificate for asymmetric keys, a shared secret for HMAC base JWS tokens, or a JWK. Each of these options can be explicitly enabled or disabled. At runtime, the filter will identify the appropriate key based on the algorithm in the token header. If an asymmetric or symmetric key is not available, the filter will use the JWK.
 
