@@ -252,7 +252,7 @@ For example, you can use:
 
 Other useful headers for identifying the key are: `${jws.header.kid}` and `${jws.header.jwk}`.
 
-The discovery policy *must* return the key in either JWK or PEM format. The JWK could be a single JWK or a JWK set, the PEM could be a PEM encoded X.509 certificate or an RSA Public key.
+The custom discovery policy *must* return the key in either JWK or PEM format and the key should be in the 'content.body' message attribute. It is up to the policy developer to ensure that the key is in the correct format and is placed on the 'content.body' message attribute. If it is known in advance that the key wil only be either a JWK or a PEM then one of these options can be disabled. The JWK could be a single JWK or a JWK set, the PEM could be a PEM encoded X.509 certificate or an RSA Public key.
 
 #### Select static key or selector
 
