@@ -283,7 +283,7 @@ You can configure the following optional setting in the **JWK from external sour
 
 #### Algorithms
 
-The final section of the Keys and Algorithm tab is the list of **Accepted Algorithms**. This list is populated with all the algorithms available for JWT signing, and it requires at least one algorithm to be selected. The selected algorithms will be validated against the "alg" header of the JWT token being processed. If none are selected, the following message is displayed, **You must enter a value for 'Accepted Algorithms'.**
+This option shows a list of **Accepted Algorithms**, which is populated with all the algorithms available for JWT signing. It requires that at least one algorithm is selected. The selected algorithms will be validated against the "alg" header of the JWT token being processed. If none are selected, the following message is displayed, **You must enter a value for 'Accepted Algorithms'.**
 
 The runtime validation works as follows:
 
