@@ -242,7 +242,16 @@ On the **Key and Algorithm** tab you can configure the location of the verificat
 
 #### Call policy to discover key
 
-Use this option to select a policy to find the appropriate key to verify a JWS Token. The policy *must* return the key in either JWK or PEM format and the key should be in the 'content.body' message attribute. Before the policy is called, two message attributes are created containing the JWS header and payload, `jws.header` and `jws.payload`, respectively. You can use these attributes in the discovery policy to locate the correct key.
+Use this option to select a policy to find the appropriate key to verify a JWS Token.
+
+You must ensure that the key in the selected policy follows these two requirements:
+
+* It is either in JWK (a single JWK or a JWK set) or PEM (a PEM encoded X.509 certificate or an RSA Public key) format. You can select one of each, or both options.
+* It is placed in the `content.body` message attribute.
+
+If no key is returned or the key is not in the correct format, the filter will fail. If the key cannot verify the JWS signature, the filter will fail.
+
+Before the policy is called, two message attributes are created containing the JWS header and payload, `jws.header` and `jws.payload`, respectively. You can use these attributes in the discovery policy to locate the correct key.
 
 For example, you can use:
 
@@ -251,10 +260,6 @@ For example, you can use:
 * `${jws.payload}` to identify the subject of the JWS, and retrieve a key from a data source, such as the KPS.
 
 Other useful headers for identifying the key are: `${jws.header.kid}` and `${jws.header.jwk}`.
-
- It is up to the policy developer to ensure that the key is in the correct format and is placed on the 'content.body' message attribute. If it is known in advance that the key wil only be either a JWK or a PEM then one of these options can be disabled. The JWK could be a single JWK or a JWK set, the PEM could be a PEM encoded X.509 certificate or an RSA Public key.
- 
- If no key is returned, or the key is not in the correct format, the filter will fail. If the key cannot verify the JWS signature the filter will fail.
 
 #### Select static key or selector
 
