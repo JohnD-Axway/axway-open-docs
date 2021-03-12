@@ -238,17 +238,25 @@ You can configure the following settings on the **JWT Verify** dialog:
 
 ### Key and Algorithm
 
-On the **Key and Algorithm** tab you can configure the location of the verification key for validation the JWS token. There are two options for selecting the key, **Call Policy to discover key** and **Select static key or selector**
+On the **Key and Algorithm** tab you can configure the location of the verification key, which validates the JWS token. You can choose one of these two options for selecting the key, **Call Policy to discover key** or **Select static key or selector**.
 
 #### Key Discovery
 
-The Key discovery option allows you to select a policy to find the appropriate key forto verify a JWS Token. Before the policy is called two message variables are created containing the JWS header and payload, _'jws.header'_ and _'jws.payload'_ respectively. These message attributes can be used in the discovery policy to locate the correct key. For example, _'${jws.header.jku}'_ could be used with the Connect to Url filter to retrieve a JWK (JSON Web Key) from an external source, similarly _'${jws.header.x5u}'_ could be used to retrieve a PEM encoded cert from an external source. Other useful headers for identifying the key are: _'${jws.header.kid}'_ or _'${jws.header.jwk}'_. Alternatively, _${jws.payload}_ may be used to identify the subject of the JWS and a key may be retrieved from a data source such as the KPS.
+Use this option to select a policy to find the appropriate key to verify a JWS Token. Before the policy is called, two message attributes are created containing the JWS header and payload, `jws.header` and `jws.payload`, respectively. You can use these attributes in the discovery policy to locate the correct key.
 
-The discovery policy **must** return the key in either JWK or PEM format. The JWK could be a single JWK or a JWK Set, the PEM could be a PEM encoded X.509 certificate or and RSA Public key.
+For example, you can use:
+
+* `${jws.header.jku}` with the [Connect to URL](/docs/apim_policydev/apigw_polref/routing_common/#connect-to-url-filter) filter to retrieve a JWK from an external source.
+* `${jws.header.x5u}` to retrieve a PEM encoded certificate from an external source.
+* `${jws.payload}` to identify the subject of the JWS, and retrieve a key from a data source, such as the KPS.
+
+Other useful headers for identifying the key are: `${jws.header.kid}` and `${jws.header.jwk}`.
+
+The discovery policy *must* return the key in either JWK or PEM format. The JWK could be a single JWK or a JWK set, the PEM could be a PEM encoded X.509 certificate or an RSA Public key.
 
 #### Static key or selector
 
-The static key option allows you to directly specify a certificate for asymmetric keys, or a shared secret for HMAC base JWS tokens or a JWK. Each of these options can be explicitly enabled or disabled. At run time the filter will identify the appropriate key based on the algorithm in the token header, if an assymmetric or symmetric key is not available the filter will use the JWK.
+This option allows you to directly specify a certificate for asymmetric keys, a shared secret for HMAC base JWS tokens, or a JWK. Each of these options can be explicitly enabled or disabled. At runtime, the filter will identify the appropriate key based on the algorithm in the token header. If an asymmetric or symmetric key is not available, the filter will use the JWK.
 
 You can configure the following optional settings in the **Verify using RSA/EC public key** section:
 
