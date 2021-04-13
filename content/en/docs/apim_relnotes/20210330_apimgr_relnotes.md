@@ -277,6 +277,7 @@ The following are known issues for this update.
 |RDAPI-23696|No UUID Validation for API Key|
 |RDAPI-23727|jan21 apimng loads application page twice|
 |RDAPI-23729|Import config fragment produces inconsistent results when an API is partially imported in REST API reporsitory|
+|RDAPI-23715|SSO users in API Manager are not logged out when logging out of API Portal|
 
 ### Scripting filter whiteboard attributes not preloaded for Jython scripts
 
