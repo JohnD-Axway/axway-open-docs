@@ -278,7 +278,6 @@ The following are known issues for this update.
 |RDAPI-23727|jan21 apimng loads application page twice|
 |RDAPI-23729|Import config fragment produces inconsistent results when an API is partially imported in REST API reporsitory|
 |RDAPI-23715|SSO users in API Manager are not logged out when logging out of API Portal|
-|RDAPI-23867|Policy studio - Can not upgrade NM or analytics fed|
 
 ### Scripting filter whiteboard attributes not preloaded for Jython scripts
 
@@ -338,9 +337,9 @@ To circumvent this problem, edit the API Gateway server configuration using Poli
 
 Related Issue: RDAPI-23549
 
-### Policy Studio can not upgrade Nodemanager or Analytics projects on import
+### Policy Studio cannot upgrade Nodemanager or Analytics projects on import
 
-Policy Studio cannot directly open or import Nodemanager or Anlytics projects, or feds, in this release. The tools 'projupgrade' and 'upgradeconfig', located in the posix/bin/ folder, must be used to upgrade the projects or feds before they are imported in Policy Studio.
+Policy Studio cannot directly open or import Nodemanager or Anlytics projects or `.fed` files in this update. You must use the tools `projupgrade` and `upgradeconfig`, located in the `posix/bin/` folder, to upgrade the resources before they are imported in Policy Studio.
 
 Related Issue: RDAPI-23867
 
