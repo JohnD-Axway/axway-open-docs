@@ -2,8 +2,8 @@
 title: API Portal 7.7 March 2021 Release Notes
 linkTitle: API Portal March 2021
 weight: 95
-date: 2021-01-06
-description: API Portal updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
+date: 2021-03-30
+description: API Portal updates are cumulative, comprising new features and changes delivered in previous updates unless specifically indicated otherwise in the Release notes.
 ---
 
 ## Installation
@@ -17,8 +17,8 @@ API Portal is available as a software installation or a virtualized deployment i
 
 ### Docker containers
 
-* To deploy API Portal in Docker containers, see [Deploy API Portal in containers](/docs/apim_installation/apiportal_docker/docker_portal_upgrade/)
-* If you are already using API Portal in Docker containers and you want to install this update, see [Upgrade API Portal in Docker containers](/docs/apim_installation/apiportal_docker/docker_portal_upgrade/)
+* To deploy API Portal in Docker containers, see [Deploy API Portal in containers](/docs/apim_installation/apiportal_docker/docker_portal_upgrade/).
+* If you are already using API Portal in Docker containers and you want to install this update, see [Upgrade API Portal in Docker containers](/docs/apim_installation/apiportal_docker/docker_portal_upgrade/).
 
 ## New features and enhancements
 
@@ -32,9 +32,9 @@ You can also watch [How to use a configuration file for simpler installations (u
 
 * New module allowing easy integration with Intercom to [enable chat support on API Portal](/docs/apim_administration/apiportal_admin/customize_page_content/#chat-support).
 * Microsoft Edge browser is now supported.
-* New Axway icons, color palettes, and typography incorporated.
+* New Axway icons, color palettes, and typography were incorporated.
 * The name of the relevant API Manager instance is now displayed on the **API catalog** (on Grid and List view layouts) and in the **API details** page.
-* A [new notification](/docs/apim_administration/apiportal_admin/customize_page_content/#show-notifications-for-applications-that-are-waiting-for-approval) has been added to alert the organization administrator on login to review applications that are pending approval.
+* A [new notification](/docs/apim_administration/apiportal_admin/customize_page_content/#show-notifications-for-applications-that-are-waiting-for-approval) has been added to alert the organization administrator to review applications that are pending approval.
 * Labels and values for custom properties are now [translatable](/docs/apim_administration/apiportal_admin/localize_language/#add-a-translated-ui-string-file).
 
 ## Limitations of this update
@@ -56,7 +56,7 @@ There are no major changes in this update.
 As part of our software development life cycle we constantly review our API Management offering. In this update, the following capabilities have been deprecated:
 
 * Internet Explorer 11 and earlier versions are no longer supported. Microsoft Edge is recommended.
-* API Portal [7.7 January 2020 update](/docs/apim_relnotes/20200130_apip_relnotes/) is end of support (EOS) now
+* API Portal [7.7 January 2020 update](/docs/apim_relnotes/20200130_apip_relnotes/) is end of support (EOS).
 
 ## Removed features
 
@@ -123,9 +123,9 @@ Related Issue: IAP-308
 
 ## Documentation
 
-This section describes documentation enhancements and related documentation.
+<!-- This section describes documentation enhancements and related documentation.
 
-### Documentation enhancements
+### Documentation enhancements -->
 
 There are no major changes in this update.
 
@@ -138,10 +138,7 @@ To find all available documentation for this product version:
 
 Customers with active support contracts need to log in to access restricted content.
 
-The following reference documents are also available:
-
-* [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en) - Lists the different operating systems, databases, browsers, and thick client platforms supported by each Axway product.
-* [Interoperability Matrix](https://docs.axway.com/bundle/Axway_Products_InteroperabilityMatrix_allOS_en) - Provides product version and interoperability information for Axway products.
+For information on the different operating systems, databases, browsers, and thick client platforms supported by each Axway product, see [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en).
 
 ## Support services
 

@@ -2,8 +2,8 @@
 title: API Gateway and API Manager 7.7 March 2021 Release Notes
 linkTitle: API Gateway and API Manager March 2021
 weight: 95
-date: 2021-01-06
-description: API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
+date: 2021-03-31
+description: API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates unless specifically indicated otherwise in the Release notes.
 ---
 
 ## Installation
@@ -15,9 +15,7 @@ description: API Gateway and API Manager updates are cumulative, comprising new 
 
 ### Update a container deployment
 
-Any custom `fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not.
-
-The `.fed` files contain the updates for the API Manager configuration and can be used to build containers.
+Any custom `.fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not. The `.fed` files contain the updates for the API Manager configuration and can be used to build containers.
 
 ## New features and enhancements
 
@@ -25,7 +23,7 @@ The following new features and enhancements are available in this update.
 
 ### Updated cipher scheme
 
-The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private keys, and so on) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
+The cipher scheme for all encrypted data in the system (such as Database, LDAP passwords, Private keys, and so on) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
 
 This feature has introduced changes related to how sensitive data is managed, how data can be encrypted in custom libraries or Policy Studio script filters, and how data can be migrated between environments, for example, from this release onwards, encrypted KPS data can no longer be transferred directly between environments.
 
@@ -39,9 +37,7 @@ A new passphrase policy and two new endpoints to manage the policy have been int
 * PUT /deployment/passphrase/nodemanager/{serviceID}
 * PUT /deployment/passphrase/group/{groupID}
 
-With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases, such as `password` or `1234`.
-
-For more information see, [Configure a passphrase policy](/docs/apim_administration/apigtw_admin/manage_user_access/#configure-a-passphrase-policy-for-node-managers-and-api-gateway-groups).
+With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases, such as `password` or `1234`. For more information see, [Configure a passphrase policy](/docs/apim_administration/apigtw_admin/manage_user_access/#configure-a-passphrase-policy-for-node-managers-and-api-gateway-groups).
 
 ### Security enhancements to JWT Sign and Verify filters
 
@@ -78,7 +74,7 @@ For more information, see [Configure HTTP strict transport security](/docs/apim_
 
 ### Certification with MySQL 8
 
-The product is now certified as compatible with MySQL 8. For more information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
+API Gateway is now certified as compatible with MySQL 8. For more information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
 
 ### YAML configuration store (Technical preview capability)
 
@@ -102,7 +98,7 @@ The version of the `libthrift` library within Cassandra database is vulnerable t
 
 ### Changes in JWT filters
 
-There is now a distinction between JSON Web Signature (JWS), where the payload can be any content type, and a JSON Web Token (JWT), which must be a valid JSON. The system defaults to JWS after you update the product.
+There is now a distinction between JSON Web Signature (JWS), where the payload can be of any content type, and a JSON Web Token (JWT), which must be a valid JSON. The system defaults to JWS after you update the product.
 
 Note also that for [JWT verification](/docs/apim_policydev/apigw_polref/integrity_additional/#jwtverify-filter), the previous **None** option for shared-key HMAC signing has now been replaced with a checkbox. If **None** was selected in the old filter, then the checkbox will be disabled after migration, resulting in the same behavior.
 
@@ -110,7 +106,7 @@ Note also that for [JWT verification](/docs/apim_policydev/apigw_polref/integrit
 
 New cipher schemes, which are used to encrypt relevant data in configuration and in KPS, have been added to API Gateway. These changes impact how sensitive data is encrypted and managed, how data can be migrated between environments, and how data can be encrypted in custom libraries or policy studio script filters.
 
-For more information on the cipher scheme and Passphrase policy enforcement feature, see [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
+For more information on the cipher scheme and the passphrase policy enforcement feature, see [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
 
 ### Driver for metrics database
 
@@ -128,7 +124,7 @@ In the [January 2020](/docs/apim_relnotes/20200130_apimgr_relnotes/) update, we 
 
 ### End of Support notices
 
-The following items are end of support (EOS) now:
+The following items are end of support (EOS):
 
 * API Gateway and API Manager [7.7 January 2020 update](/docs/apim_relnotes/20200130_apimgr_relnotes/).
 * Internet Explorer 11 and earlier versions are no longer supported. Microsoft Edge is recommended.
@@ -350,7 +346,9 @@ Related Issue: RDAPI-23867
 
 ## Documentation
 
-<!-- This section describes documentation enhancements and related documentation. -->
+<!-- This section describes documentation enhancements and related documentation.
+
+### Documentation enhancements -->
 
 There are no major changes in this update.
 
@@ -363,10 +361,7 @@ To find all available documentation for this product version:
 
 Customers with active support contracts need to log in to access restricted content.
 
-The following reference documents are also available:
-
-* [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en) - Lists the different operating systems, databases, browsers, and thick client platforms supported by each Axway product.
-* [Interoperability Matrix](https://docs.axway.com/bundle/Axway_Products_InteroperabilityMatrix_allOS_en) - Provides product version and interoperability information for Axway products.
+For information on the different operating systems, databases, browsers, and thick client platforms supported by each Axway product, see [Supported Platforms](https://docs.axway.com/bundle/Axway_Products_SupportedPlatforms_allOS_en).
 
 ## Support services
 
