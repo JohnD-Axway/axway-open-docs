@@ -3,16 +3,21 @@ title: API Gateway and API Manager 7.7 March 2021 Release Notes
 linkTitle: API Gateway and API Manager March 2021
 weight: 95
 date: 2021-01-06
+description: API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
 ---
-## Summary
 
-API Gateway is available as a software installation or a virtualized deployment in Docker containers. API Manager is a licensed product running on top of API Gateway, and has the same deployment options as API Gateway.
+## Installation
 
-The software installation is available on Linux. For more details on supported platforms for software installation, see [System requirements](/docs/apim_installation/apigtw_install/system_requirements/).
+* To **update** your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
+* To **upgrade** from an older version, see [Upgrade from API Gateway 7.5.x or 7.6.x](/docs/apim_installation/apigw_upgrade/upgrade_steps_extcass/).
+* For more details on supported platforms for software installation, see [System requirements](/docs/apim_installation/apigtw_install/system_requirements/).
+* For a summary of the system requirements for a Docker deployment, see [Set up Docker environment](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/).
 
-Docker deployment is supported on Linux. For a summary of the system requirements for a Docker deployment, see [Set up Docker environment](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/).
+### Update a container deployment
 
-{{< alert title="Note" color="primary" >}}API Gateway and API Manager updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.{{< /alert >}}
+Any custom `fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not.
+
+The `.fed` files contain the updates for the API Manager configuration and can be used to build containers.
 
 ## New features and enhancements
 
@@ -342,18 +347,6 @@ Related Issue: RDAPI-23549
 Policy Studio cannot directly open or import Nodemanager or Anlytics projects or `.fed` files in this update. You must use the tools `projupgrade` and `upgradeconfig`, located in the `posix/bin/` folder, to upgrade the resources before they are imported in Policy Studio.
 
 Related Issue: RDAPI-23867
-
-## Update a classic (non-container) deployment
-
-To **update** your API Gateway, see [Update from API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/).
-
-To **upgrade** from an older version, see [Upgrade from API Gateway 7.5.x or 7.6.x](/docs/apim_installation/apigw_upgrade/upgrade_steps_extcass/).
-
-## Update a container deployment
-
-Any custom `fed` files deployed to a container must be upgraded using [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) or [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options). They must be upgraded the same way, regardless of whether they are API Manager enabled or not.
-
-The `fed` now contains the updates for the API Manager configuration and can be used to build containers.
 
 ## Documentation
 

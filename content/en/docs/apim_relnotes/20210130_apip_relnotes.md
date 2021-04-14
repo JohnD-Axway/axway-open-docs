@@ -3,10 +3,8 @@ title: API Portal 7.7 January 2021 Release Notes
 linkTitle: API Portal January 2021
 weight: 100
 date: 2021-01-06
+description: API Portal updates are cumulative, comprising new features and changes delivered in previous updates, unless specifically indicated otherwise in the Release notes.
 ---
-## Summary
-
-API Portal provides an API consumer-facing interface that you can customize to match your corporate brand. API Portal is a layered product linked to API Manager, and requires both API Manager and API Gateway. For more information, see the API Gateway and API Manager documentation.
 
 ## Installation
 
